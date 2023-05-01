@@ -18,6 +18,7 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/chakra/theme.js"],
+  "exclude": ["node_modules"],
+  "skipLibCheck": true 
 }
