@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
 import { BsLink45Deg, BsMic } from "react-icons/bs";
 import { BiPoll } from "react-icons/bi";
-import TabItem from "./TabItem";
+import NewPostTabItem from "./TabItem";
 import TextInput from "./PostForm/TextInput";
 import ImageUpload from "./PostForm/ImageUpload";
 import { Post } from "@/src/atoms/postsAtom";
@@ -25,7 +25,7 @@ type NewPostForProps = {
   communityImageURL?: string;
 };
 
-const formTabs = [
+const formTabs: TabItem[]= [
   {
     title: "Post",
     icon: IoDocumentText,
@@ -47,7 +47,8 @@ const formTabs = [
     icon: BsMic,
   },
 ];
-export type TabItem = {
+
+export type  TabItem = {
   title: string;
   icon: typeof Icon.arguments;
 };
@@ -72,7 +73,7 @@ const NewPostForm: React.FC<NewPostForProps> = ({ user, communityImageURL }) => 
     const newPost: Post = {
       communityId: communityId as string,
       creatorId: user.uid,
-      creatorDisplayName: user.email!.split("@")[0],
+      creatorDisplayName: user?.email!.split("@")[0],
       title: textInput.title,
       body: textInput.body,
       numberOfComments: 0,
@@ -120,7 +121,7 @@ const NewPostForm: React.FC<NewPostForProps> = ({ user, communityImageURL }) => 
     <Flex direction="column" borderRadius={4} mt={2}>
       <Flex width="100%">
         {formTabs.map((item) => (
-          <TabItem
+          <NewPostTabItem
             key={item.title}
             item={item}
             selected={item.title === selectedTab}
