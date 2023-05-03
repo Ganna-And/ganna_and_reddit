@@ -10,9 +10,6 @@ import { FIREBASE_ERRORS } from '@/src/firebase/Errors';
 type LoginProps = {
     
 };
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
-
 const Login:React.FC<LoginProps> = () => {
     const setAuthModalState = useSetRecoilState(authModalState)
     const [loginForm, setLoginForm] = useState({

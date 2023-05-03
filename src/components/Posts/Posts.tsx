@@ -58,7 +58,6 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
     {loading ?( <PostLoader/>) : (
     <Stack>
       {postStateValue.posts.map((item) => (
-        // eslint-disable-next-line react/jsx-key
         <PostItem
           key={item.id}
           post={item}

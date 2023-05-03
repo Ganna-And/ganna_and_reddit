@@ -120,7 +120,6 @@ const NewPostForm: React.FC<NewPostForProps> = ({ user, communityImageURL }) => 
     <Flex direction="column" borderRadius={4} mt={2}>
       <Flex width="100%">
         {formTabs.map((item) => (
-          // eslint-disable-next-line react/jsx-key
           <TabItem
             key={item.title}
             item={item}
