@@ -142,7 +142,7 @@ const PostItem: React.FC<PostItemProps> = ({
             )}
             <Text>
               Posted by {post.creatorDisplayName} <span></span>
-              {moment(new Date(post.createdAt.seconds * 1000)).fromNow()}
+              {post.createdAt && moment(new Date(post.createdAt.seconds * 1000)).fromNow()}
             </Text>
           </Stack>
           <Text fontSize="12pt" fontWeight={600}>

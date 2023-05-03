@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 
 const usePosts = () => {
     const [postStateValue, setPostStateValue] = useRecoilState(postState)
-    const [user] = useAuthState(auth);
+    const [user, loadingUser] = useAuthState(auth);
     const setAuthModalState = useSetRecoilState(authModalState);
   const router = useRouter();
 const currentCommunity = useRecoilValue(CommunityState).currentCommunity;
@@ -33,6 +33,7 @@ const onVote = async(event:React.MouseEvent<SVGElement, MouseEvent>, post:Post, 
        const updatedPosts = [...postStateValue.posts];
        let updatedPostVotes = [...postStateValue.postVotes];
        let voteChange = vote;
+       
        
        const batch = writeBatch(firestore);
 if (!existingVote) {
@@ -121,15 +122,20 @@ router.push(`/r/${post.communityId}/comments/${post.id}`);
             await deleteObject(imgRef)
           }
     //delete post from firestore
+    if (post.id && typeof post.id === 'string'){
     const postDocRef = doc(firestore, 'posts', post.id);
-    await deleteDoc(postDocRef);
+    await deleteDoc(postDocRef);}else{
+      console.error('post.id is undefined or not a string')
+    }
 
     //update recoil state
 
     setPostStateValue((prev)=>({
         ...prev,
         posts: prev.posts.filter((item)=> item.id !== post.id),
+        
     }));
+
         return true  
         } catch (error) {
          return false   
@@ -159,13 +165,14 @@ router.push(`/r/${post.communityId}/comments/${post.id}`);
        }, [user, currentCommunity]);
 
        useEffect(()=>{
-        if(!user){
+        if(!user && !loadingUser){
             setPostStateValue((prev)=>( {
                 ...prev,
                 postVotes: [],
-            }))
+            }));
+            return;
         }
-       },[user]);
+       },[user, loadingUser]);
        
 
     return {
