@@ -51,6 +51,7 @@ if(pid && !postStateValue.selectedPost){
             <>
             {postStateValue.selectedPost &&
             (<PostItem 
+                homePage
                 post={postStateValue.selectedPost} 
             onDeletePost={onDeletePost}
             onVote={onVote}
