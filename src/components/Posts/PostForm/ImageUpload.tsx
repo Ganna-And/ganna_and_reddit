@@ -21,12 +21,14 @@ setSelectedTab}
        <Flex direction='column' justify='center' align='center' width='100%'>
        {selectFile ? ( 
        <>
-      <Image src={selectFile} alt='select your image'
-      maxHeight='480px' maxWidth='480px'/>
+       {selectFile && (<Image src={selectFile} alt='select your image'
+      maxHeight='480px' maxWidth='480px'/>)}
+      
       <Stack direction='row' mt={4}>
         <Button height='28px' 
         onClick={()=>setSelectedTab('Post')}>Back to post</Button>
-        <Button variant='outline' height='28px' onClick={()=>setSelectFile('')}>Remove</Button>
+        <Button variant='outline' height='28px'
+         onClick={()=> setSelectFile && setSelectFile('')}>Remove</Button>
       </Stack>
        </>) :
       ( <Flex justify='center' align='center' 
@@ -40,7 +42,7 @@ setSelectedTab}
             <input ref={selectDocRef} hidden
             type='file'
             onChange={onSelectImage} />
-            <img src={selectFile} />
+            <Image alt='select file' src={selectFile} />
         </Flex>)}
        </Flex> 
     )
